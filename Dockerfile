@@ -3,7 +3,7 @@ FROM alpine
 ENV SAMBA_DC_ACT join
 ENV SAMBA_DNS_REALM tld.your.domain
 ENV SAMBA_DOMAIN tld
-ENV SAMBA_ROLE dc
+ENV SAMBA_HOST hostname
 ENV SAMBA_ADMIN_PASSWORD secret.password
 ENV SAMBA_DNS_FORWARDER 8.8.8.8
 COPY samba.init /etc/init.d/samba
