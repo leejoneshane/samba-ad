@@ -28,4 +28,4 @@ EXPOSE 37/udp \
        3269/tcp
 
 VOLUME ["/etc/samba", "/var/lib/samba", "var/log/samba"]
-CMD /etc/sbin/samba -i
+ENTRYPOINT ["configure.sh"]
