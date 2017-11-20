@@ -2,7 +2,8 @@
 set -e
 
 # Configure the AD DC
-if [ ! -f /etc/samba/smb.conf ]; then
+if [[ "${SAMBA_DOMAIN}" != "tld" && "${SAMBA_DNS_REALM}" != "tld.your.domain" ]]; then
+  if[ ! -f /etc/samba/smb.conf && ]; then
     mkdir -p /samba/etc /samba/lib /samba/log
     echo "${SAMBA_DOMAIN} - Begin Domain ${SAMBA_DC_ACT}..."
     samba-tool domain ${SAMBA_DC_ACT} \
@@ -16,6 +17,7 @@ if [ ! -f /etc/samba/smb.conf ]; then
     
     echo "dns forwarder = ${SAMBA_DNS_FORWARDER}" >> /samba/etc/smb.conf
     echo "unix password sync = no" >> /samba/etc/smb.conf
+  fi
 fi
 
 exec /usr/sbin/samba -i
