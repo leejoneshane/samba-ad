@@ -9,7 +9,8 @@ ENV SAMBA_DNS_FORWARDER 8.8.8.8
 ADD configure.sh /
 
 RUN apk update \
-    && apk add --no-cache bash samba-dc supervisor
+    && apk add --no-cache bash samba-dc supervisor \
+    && chmod +x /configure.sh
 
 EXPOSE 37/udp \
        53 \
