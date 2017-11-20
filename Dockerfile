@@ -6,7 +6,7 @@ ENV SAMBA_DOMAIN tld
 ENV SAMBA_ROLE dc
 ENV SAMBA_ADMIN_PASSWORD secret.password
 ENV SAMBA_DNS_FORWARDER 8.8.8.8
-ADD docker-entrypoint.sh /
+ADD configure.sh /
 
 RUN apk update \
     && apk add --no-cache bash samba-dc supervisor
@@ -27,6 +27,4 @@ EXPOSE 37/udp \
        3269/tcp
 
 VOLUME ["/etc/samba", "/var/lib/samba", "var/log/samba"]
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["samba"]
