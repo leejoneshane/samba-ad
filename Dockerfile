@@ -7,6 +7,7 @@ ENV SAMBA_ROLE dc
 ENV SAMBA_ADMIN_PASSWORD secret.password
 ENV SAMBA_DNS_FORWARDER 8.8.8.8
 COPY samba.init /etc/init.d/samba
+COPY smb.conf /etc/samba/smb.conf
 COPY configure.sh /configure.sh
 
 RUN apk update \
