@@ -24,7 +24,7 @@ if [[ "${SAMBA_DOMAIN}" != "tld" && "${SAMBA_DNS_REALM}" != "tld.your.domain" ]]
         --use-rfc2307 \
         --domain="${SAMBA_DOMAIN}" \
         --adminpass="${SAMBA_ADMIN_PASSWORD}" \
-        --server-role="${SAMBA_ROLE}" \
+        --server-role=dc \
         --realm="${SAMBA_DNS_REALM}" \
         --dns-backend="SAMBA_INTERNAL"
     echo "${SAMBA_DOMAIN} - Domain ${SAMBA_DC_ACT} Successfully."
