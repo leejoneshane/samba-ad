@@ -2,7 +2,7 @@
 set -e
 
 # Configure the AD DC
-if [ ! -f /samba/etc/smb.conf ]; then
+if [ ! -f /etc/samba/smb.conf ]; then
     mkdir -p /samba/etc /samba/lib /samba/log
     echo "${SAMBA_DOMAIN} - Begin Domain ${SAMBA_DC_ACT}..."
     samba-tool domain ${SAMBA_DC_ACT} \
@@ -18,10 +18,4 @@ if [ ! -f /samba/etc/smb.conf ]; then
     echo "unix password sync = no" >> /samba/etc/smb.conf
 fi
 
-if [ "$1" = 'samba' ]; then
-    exec /usr/sbin/samba -i
-fi
-
-# Assume that user wants to run their own process,
-# for example a `bash` shell to explore this image
-exec "$@"
+exec /usr/sbin/samba -i
