@@ -9,8 +9,9 @@ ENV SAMBA_DNS_FORWARDER 8.8.8.8
 ADD configure.sh /
 
 RUN apk update \
-    && apk add --no-cache bash samba-dc supervisor \
-    && chmod +x /configure.sh
+    && apk add --no-cache bash samba-dc krb5 supervisor \
+    && chmod +x /configure.sh \
+    && ln -sf /var/lib/samba/private/krb5.conf /etc/krb5.conf
 
 EXPOSE 37/udp \
        53 \
