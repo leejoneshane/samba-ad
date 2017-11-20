@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine
 
 ENV SAMBA_DC_ACT join
 ENV SAMBA_DNS_REALM tld.your.domain
@@ -9,13 +9,7 @@ ENV SAMBA_DNS_FORWARDER 8.8.8.8
 ADD docker-entrypoint.sh /
 
 RUN apk update \
-    && apk add --no-cache samba-dc supervisor \
-    && rm -rf /etc/samba/smb.conf \
-    && rm -rf /var/lib/samba \
-    && rm -rf /var/log/samba \
-    && ln -s /samba/etc /etc/samba \
-    && ln -s /samba/lib /var/lib/samba \
-    && ln -s /samba/log /var/log/samba
+    && apk add --no-cache bash samba-dc supervisor
 
 EXPOSE 37/udp \
        53 \
@@ -32,7 +26,7 @@ EXPOSE 37/udp \
        3268/tcp \
        3269/tcp
 
-VOLUME ["/samba"]
+VOLUME ["/etc/samba", "/var/lib/samba", "var/log/samba"]
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["samba"]
