@@ -1,6 +1,13 @@
 #!/bin/sh
 set -e
 
+COMMAND=bash
+
+# Add $COMMAND if needed
+if [ "${1:0:1}" = '-' ]; then
+	set -- $COMMAND "$@"
+fi
+
 # Configure the AD DC
 if [[ "${SAMBA_DOMAIN}" != "tld" && "${SAMBA_DNS_REALM}" != "tld.your.domain" ]]; then
   if[ ! -f /etc/samba/smb.conf && ]; then
@@ -17,7 +24,16 @@ if [[ "${SAMBA_DOMAIN}" != "tld" && "${SAMBA_DNS_REALM}" != "tld.your.domain" ]]
     
     echo "dns forwarder = ${SAMBA_DNS_FORWARDER}" >> /samba/etc/smb.conf
     echo "unix password sync = no" >> /samba/etc/smb.conf
+    
+    sed -ri \
+        -e "s/(search) .*/\1 ${SAMBA_DNS_REALM}/" \
+        -e "s/(nameserver) .*/\1 127.0.0.1/" \
+        /etc/resolv.conf
   fi
 fi
 
-exec /usr/sbin/samba -i
+if [ "$1" = 'samba' ]; then
+    exec /usr/sbin/samba -i
+fi
+
+exec "$@"
