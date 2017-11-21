@@ -14,7 +14,7 @@ RUN apk update \
     && apk add --no-cache bash samba-dc krb5 supervisor \
     && chmod +x /configure.sh \
     && ln -sf /var/lib/samba/private/krb5.conf /etc/krb5.conf \
-    && rm -rf /etc/samba/* /var/log/samba /var/lib/samba \
+    && rm -rf /etc/samba /var/log/samba /var/lib/samba \
     && mkdir -p /samba/etc /samba/log /samba/lib \
     && ln -s /sambe/etc /etc/samba \
     && ln -s /samba/log /var/log/samba \
