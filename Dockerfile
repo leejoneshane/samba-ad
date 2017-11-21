@@ -16,7 +16,7 @@ RUN apk update \
     && ln -sf /var/lib/samba/private/krb5.conf /etc/krb5.conf \
     && rm -rf /etc/samba /var/log/samba /var/lib/samba \
     && mkdir -p /samba/etc /samba/log /samba/lib \
-    && ln -s /sambe/etc /etc/samba \
+    && ln -s /samba/etc /etc/samba \
     && ln -s /samba/log /var/log/samba \
     && ln -s /samba/lib /var/lib/samba
 
