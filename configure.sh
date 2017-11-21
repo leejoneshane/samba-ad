@@ -1,13 +1,6 @@
 #!/bin/sh
 set -e
 
-COMMAND=bash
-
-# Add $COMMAND if needed
-if [ "${1:0:1}" = '-' ]; then
-	set -- $COMMAND "$@"
-fi
-
 # Configure the AD DC
 if [[ "$SAMBA_DOMAIN" != "tld" && "$SAMBA_DNS_REALM" != "tld.your.domain" ]]; then
   if [ ! -f /etc/samba/smb.conf ]; then
@@ -35,9 +28,7 @@ if [[ "$SAMBA_DOMAIN" != "tld" && "$SAMBA_DNS_REALM" != "tld.your.domain" ]]; th
       -e "s/(nameserver) .*/\1 127.0.0.1/" \
       /etc/resolv.conf
       
-  if [ "$1" = 'samba' ]; then
-    exec /usr/sbin/samba -i
-  fi
+  exec /usr/sbin/samba -i
+else
+  exec bash
 fi
-
-exec "$@"
