@@ -29,6 +29,7 @@ if [[ "$SAMBA_DOMAIN" != "tld" && "$SAMBA_DNS_REALM" != "tld.your.domain" ]]; th
       /etc/resolv.conf
       
   exec /usr/sbin/samba -i
+  exec ntpd -d -f /etc/ntpd.conf -s
 else
   exec bash
 fi
