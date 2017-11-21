@@ -6,10 +6,7 @@ ENV SAMBA_DOMAIN tld
 ENV SAMBA_HOST hostname
 ENV SAMBA_ADMIN_PASSWORD secret.password
 ENV SAMBA_DNS_FORWARDER 8.8.8.8
-ADD samba.init /etc/init.d/samba
 ADD configure.sh /configure.sh
-ADD ntpd.conf /etc/ntpd.conf
-ADD resolv.conf /etc/resolv.conf
 
 RUN apk update \
     && apk add --no-cache bash acl samba-dc krb5 openntpd supervisor \
@@ -18,7 +15,9 @@ RUN apk update \
     && mkdir -p /samba/etc /samba/log /samba/lib \
     && ln -s /samba/etc /etc/samba \
     && ln -s /samba/log /var/log/samba \
-    && ln -s /samba/lib /var/lib/samba
+    && ln -s /samba/lib /var/lib/samba \
+    && echo "nameserver 127.0.0.1" > /etc/resolv.conf \
+    && echo "servers pool.ntp.org" > /etc/ntpd.conf
 
 EXPOSE 37/udp \
        53 \
