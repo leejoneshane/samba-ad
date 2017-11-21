@@ -6,11 +6,11 @@ ENV SAMBA_DOMAIN tld
 ENV SAMBA_HOST hostname
 ENV SAMBA_ADMIN_PASSWORD secret.password
 ENV SAMBA_DNS_FORWARDER 8.8.8.8
-ADD configure.sh /configure.sh
+ADD docker-entrypoint.sh /usr/sbin/docker-entrypoint.sh
 
 RUN apk update \
     && apk add --no-cache bash acl samba-dc krb5 openntpd supervisor \
-    && chmod +x /configure.sh \
+    && chmod +x /usr/sbin/docker-entrypoint.sh \
     && rm -rf /etc/samba /var/log/samba /var/lib/samba \
     && mkdir -p /samba/etc /samba/log /samba/lib \
     && ln -s /samba/etc /etc/samba \
@@ -35,4 +35,4 @@ EXPOSE 37/udp \
        3269/tcp
 
 VOLUME ["/samba"]
-ENTRYPOINT ["/configure.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
