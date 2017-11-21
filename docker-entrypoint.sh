@@ -6,7 +6,6 @@ if [[ "$SAMBA_DOMAIN" != "tld" && "$SAMBA_DNS_REALM" != "tld.your.domain" ]]; th
   if [ ! -f /etc/samba/smb.conf ]; then
     echo "$SAMBA_DOMAIN - Begin Domain $SAMBA_DC_ACT..."
     samba-tool domain $SAMBA_DC_ACT \
-        --use-rfc2307 \
         --domain="$SAMBA_DOMAIN" \
         --adminpass="$SAMBA_ADMIN_PASSWORD" \
         --server-role=dc \
