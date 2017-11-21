@@ -37,4 +37,3 @@ EXPOSE 37/udp \
 
 VOLUME ["/samba"]
 ENTRYPOINT ["/configure.sh"]
-CMD ["bash"]
