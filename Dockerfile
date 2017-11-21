@@ -7,7 +7,6 @@ ENV SAMBA_HOST hostname
 ENV SAMBA_ADMIN_PASSWORD secret.password
 ENV SAMBA_DNS_FORWARDER 8.8.8.8
 ADD samba.init /etc/init.d/samba
-ADD smb.conf /smb.conf
 ADD configure.sh /configure.sh
 ADD ntpd.conf /etc/ntpd.conf
 
