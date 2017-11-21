@@ -11,7 +11,7 @@ ADD configure.sh /configure.sh
 ADD ntpd.conf /etc/ntpd.conf
 
 RUN apk update \
-    && apk add --no-cache bash samba-dc krb5 openntpd supervisor \
+    && apk add --no-cache bash acl samba-dc krb5 openntpd supervisor \
     && chmod +x /configure.sh \
     && ln -sf /var/lib/samba/private/krb5.conf /etc/krb5.conf \
     && rm -rf /etc/samba /var/log/samba /var/lib/samba \
