@@ -36,4 +36,4 @@ EXPOSE 37/udp \
        3269/tcp
 
 VOLUME ["/samba"]
-ENTRYPOINT ["configure.sh"]
+ENTRYPOINT ["/configure.sh"]
