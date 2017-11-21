@@ -24,4 +24,8 @@ if [[ "$SAMBA_DOMAIN" != "tld" && "$SAMBA_DNS_REALM" != "tld.your.domain" ]]; th
   fi
 fi
 
-exec "$@"
+if [ "$#" -lt 1 ]; then
+  exec bash
+else
+  exec "$@"
+fi
