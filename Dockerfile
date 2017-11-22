@@ -16,7 +16,6 @@ RUN apk update \
     && ln -s /samba/etc /etc/samba \
     && ln -s /samba/log /var/log/samba \
     && ln -s /samba/lib /var/lib/samba \
-    && echo "nameserver 127.0.0.1" > /etc/resolv.conf \
     && echo "servers pool.ntp.org" > /etc/ntpd.conf
 
 EXPOSE 37/udp \
