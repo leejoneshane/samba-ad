@@ -5,7 +5,7 @@ This is a docker image to runing samba base AD build from alpine linux. It's abo
 # How to use
 
 AD is binding a lot of services such as Kerbros, LDAP, NBT, File Sharing, Time Server, DNS, Computer Discovery and so on.
-These services packages is already building in this image. But you need follow the step to prepare it for working properly.
+These services packages is already building in this image. But you need follow the step to prepare it to working properly.
 
 # Provision a New Domain
 
