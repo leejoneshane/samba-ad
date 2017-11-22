@@ -1,10 +1,5 @@
 FROM alpine
 
-ENV SAMBA_DC_ACT
-ENV SAMBA_DNS_REALM
-ENV SAMBA_DOMAIN
-ENV SAMBA_ADMIN_PASSWORD
-ENV SAMBA_DNS_FORWARDER
 ADD docker-entrypoint.sh /usr/sbin/docker-entrypoint.sh
 
 RUN apk update \
