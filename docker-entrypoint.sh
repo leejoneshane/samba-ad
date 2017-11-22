@@ -6,6 +6,8 @@ if [[ ! -z "$SAMBA_DOMAIN" && ! -z "$SAMBA_DNS_REALM" ]]; then
   if [[ ! -f /etc/samba/smb.conf ]]; then
     if [[ "$SAMBA_DC_ACT" == "join" ]]; then
       echo "create kerbros client settings ..."
+      export SAMBA_DNS_REALM=$(echo $SAMBA_DNS_REALM | tr 'a-z' 'A-Z')
+      export SAMBA_DOMAIN=$(echo $SAMBA_DOMAIN | tr 'a-z' 'A-Z')
       rm -rf /etc/krb5.conf
       echo " 
 [libdefaults]
@@ -18,11 +20,8 @@ if [[ ! -z "$SAMBA_DOMAIN" && ! -z "$SAMBA_DNS_REALM" ]]; then
         "$SAMBA_DNS_REALM" DC \
         -W "$SAMBA_DOMAIN" \
         -U Administrator \
-        --adminpass="$SAMBA_ADMIN_PASSWORD" \
-        --kerberos=KERBEROS \
-        --option="dns backend = SAMBA_INTERNAL" \
-        --option="dns forwarder = $SAMBA_DNS_FORWARDER" \
-        --option="server services = -s3fs rpc nbt wrepl ldap cldap kdc drepl winbindd ntp_signd kcc dnsupdate dns"
+        --password="$SAMBA_ADMIN_PASSWORD" \
+        --option="dns forwarder = $SAMBA_DNS_FORWARDER"
       echo "$SAMBA_DOMAIN - Domain Join as DC Successfully."
     else
       echo "$SAMBA_DOMAIN - Begin Domain Provisioning..."
