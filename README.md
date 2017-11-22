@@ -1,6 +1,7 @@
 # samba-ad
 
 This is a docker image to runing samba base AD build from alpine linux. It's about 38MB.
+Samba 4.7 *CAN NOT* support Windows 2016 right now.
 
 # How to use
 
