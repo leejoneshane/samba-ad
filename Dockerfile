@@ -3,7 +3,7 @@ FROM alpine
 ADD docker-entrypoint.sh /usr/sbin/docker-entrypoint.sh
 
 RUN apk update \
-    && apk add --no-cache bash acl samba-dc krb5 openntpd supervisor \
+    && apk add --no-cache bash attr acl samba-dc krb5 openntpd \
     && chmod +x /usr/sbin/docker-entrypoint.sh \
     && rm -rf /etc/samba /var/log/samba /var/lib/samba \
     && mkdir -p /samba/etc /samba/log /samba/lib \
