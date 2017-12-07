@@ -10,7 +10,15 @@ RUN apk update \
     && ln -s /samba/etc /etc/samba \
     && ln -s /samba/log /var/log/samba \
     && ln -s /samba/lib /var/lib/samba \
-    && echo "servers pool.ntp.org" > /etc/ntpd.conf
+    && echo "servers pool.ntp.org" > /etc/ntpd.conf \
+    && cd /root \
+    && wget https://www.isc.org/downloads/file/bind-9-11-2/ \
+    && tar -xzf bind-9.11.2.tar.gz \
+    && cd bind* \
+    && ./configure --with-gssapi=/usr/include/gssapi --with-dlopen=yes \
+    && make \
+    && make install \
+    && wget -q -O /var/named/named.root http://www.internic.net/zones/named.root
 
 EXPOSE 37/udp \
        53 \
