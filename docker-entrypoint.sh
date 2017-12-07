@@ -34,6 +34,8 @@ if [[ ! -z "$SAMBA_DOMAIN" && ! -z "$SAMBA_DNS_REALM" ]]; then
         --dns-backend="SAMBA_INTERNAL"
       echo "$SAMBA_DOMAIN - Domain Provisioning Successfully."
     fi
+    
+    echo 'include "/usr/local/samba/private/named.conf";' >> /etc/bind/named.conf
   fi
   if [[ ! -f /etc/krb5.conf ]]; then
     ln -sf /var/lib/samba/private/krb5.conf /etc/krb5.conf
