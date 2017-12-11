@@ -36,6 +36,7 @@ if [[ ! -z "$SAMBA_DOMAIN" && ! -z "$SAMBA_DNS_REALM" ]]; then
     fi
     
     echo 'include "/usr/local/samba/private/named.conf";' >> /etc/bind/named.conf
+    samba_upgradedns --dns-backend=BIND9_DLZ
   fi
   if [[ ! -f /etc/krb5.conf ]]; then
     ln -sf /var/lib/samba/private/krb5.conf /etc/krb5.conf
