@@ -20,8 +20,7 @@ if [[ ! -z "$SAMBA_DOMAIN" && ! -z "$SAMBA_DNS_REALM" ]]; then
         "$SAMBA_DNS_REALM" DC \
         -W "$SAMBA_DOMAIN" \
         -U Administrator \
-        --password="$SAMBA_ADMIN_PASSWORD" \
-        --option="dns forwarder = $SAMBA_DNS_FORWARDER"
+        --password="$SAMBA_ADMIN_PASSWORD"
       echo "$SAMBA_DOMAIN - Domain Join as DC Successfully."
     else
       echo "$SAMBA_DOMAIN - Begin Domain Provisioning..."
@@ -31,8 +30,9 @@ if [[ ! -z "$SAMBA_DOMAIN" && ! -z "$SAMBA_DNS_REALM" ]]; then
         --adminpass="$SAMBA_ADMIN_PASSWORD" \
         --server-role=dc \
         --realm="$SAMBA_DNS_REALM" \
-        --dns-backend="SAMBA_INTERNAL"
-      echo "$SAMBA_DOMAIN - Domain Provisioning Successfully."
+        --dns-backend="SAMBA_INTERNAL" \
+        --option="dns forwarder = $SAMBA_DNS_FORWARDER"
+        echo "$SAMBA_DOMAIN - Domain Provisioning Successfully."
     fi
     
     echo 'include "/usr/local/samba/private/named.conf";' >> /etc/bind/named.conf
